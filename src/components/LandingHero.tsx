@@ -1,48 +1,23 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, ComputerIcon, Download, Usb, Zap } from 'lucide-react'
+import { ComputerIcon, Download, Usb, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import DeviceSelector from './DeviceSelector'
-import BoardVersionSelector from './BoardVersionSelector'
-import { ESPLoader, LoaderOptions, Transport, FlashOptions } from 'esptool-js'
+import { ESPLoader, Transport } from 'esptool-js'
 import Header from './Header'
 import InstructionPanel from './InstructionPanel'
+import Selector from './Selector'
+import device_data from './firmware_data.json'
 
 import { Terminal } from '@xterm/xterm';
 import '@xterm/xterm/css/xterm.css';
 
 import { serial } from "web-serial-polyfill";
 
-const firmwareUrls: Record<string, Record<string, string>> = {
-  max: {
-    '102': 'firmware/esp-miner-factory-102-v2.4.0.bin'
-  },
-  ultra: {
-    '202': 'firmware/esp-miner-factory-202-v2.4.0.bin',
-    '204': 'firmware/esp-miner-factory-204-v2.4.0.bin',
-    '205': 'firmware/esp-miner-factory-205-v2.4.0.bin',
-  },
-  supra: {
-    '401': 'firmware/esp-miner-factory-401-v2.4.0.bin',
-    '402': 'firmware/esp-miner-factory-402-v2.4.0.bin',
-    '403': 'firmware/esp-miner-factory-403-v2.4.0.bin'
-  },
-  gamma: {
-    '601': 'firmware/esp-miner-factory-601-v2.4.0.bin',
-  },
-  ultrahex: {
-    '302': 'firmware/esp-miner-factory-302-v2.1.0.bin',
-    '303': 'firmware/esp-miner-factory-303-v2.1.0.bin',
-  },
-  // Add other device models and their firmware versions here
-};
-
-type DeviceModel = keyof typeof firmwareUrls;
-
 export default function LandingHero() {
-  const [selectedDevice, setSelectedDevice] = useState<DeviceModel | ''>('')
+  const [selectedDevice, setSelectedDevice] = useState<string>('')
   const [selectedBoardVersion, setSelectedBoardVersion] = useState('')
+  const [selectedFirmware, setSelectedFirmware] = useState('')
   const [status, setStatus] = useState('')
   const [isConnecting, setIsConnecting] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
@@ -66,8 +41,8 @@ export default function LandingHero() {
 
   useEffect(() => {
     if (terminalContainerRef.current && !terminalRef.current && isLogging) {
-      const term = new Terminal({ 
-        cols: 80, 
+      const term = new Terminal({
+        cols: 80,
         rows: 24,
         theme: {
           background: '#1a1b26',
@@ -88,20 +63,31 @@ export default function LandingHero() {
     };
   }, [isLogging]);
 
+  const devices = device_data.devices;
+  const device = selectedDevice !== ''
+    ? devices.find(d => d.name == selectedDevice)!
+    : { boards: [] };
+  const board = selectedBoardVersion !== ''
+    ? device.boards.find(b => b.name == selectedBoardVersion)!
+    : { supported_firmware: [] };
+  const firmware = selectedFirmware !== ''
+    ? board.supported_firmware.find(f => f.version == selectedFirmware)!
+    : { path: '' };
+
   const handleConnect = async () => {
     setIsConnecting(true)
     setStatus('Connecting to device...')
 
     try {
       const port = await navigator.serial.requestPort()
-      await port.open({ 
+      await port.open({
         baudRate: 115200,
         dataBits: 8,
         stopBits: 1,
         parity: 'none',
         flowControl: 'none'
       })
-      
+
       serialPortRef.current = port
       setIsConnected(true)
       setStatus('Connected successfully!')
@@ -153,7 +139,7 @@ export default function LandingHero() {
       const inputDone = port.readable.pipeTo(decoder.writable);
       const inputStream = decoder.readable;
       const reader = inputStream.getReader();
-      
+
       textDecoderRef.current = decoder;
       readableStreamClosedRef.current = inputDone;
       readerRef.current = reader;
@@ -224,7 +210,7 @@ export default function LandingHero() {
 
     setIsFlashing(true)
     setStatus('Preparing to flash...')
-    
+
     try {
       // Stop logging if it's active
       if (isLogging) {
@@ -243,7 +229,7 @@ export default function LandingHero() {
         baudrate: 115200,
         romBaudrate: 115200,
         terminal: {
-          clean() {},
+          clean() { },
           writeLine(data: string) {
             setStatus(data);
           },
@@ -255,20 +241,19 @@ export default function LandingHero() {
 
       await loader.main();
 
-      const firmwareUrl = firmwareUrls[selectedDevice]?.[selectedBoardVersion]
-      if (!firmwareUrl) {
+      if (!firmware) {
         throw new Error('No firmware available for the selected device and board version')
       }
 
-      const firmwareResponse = await fetch(firmwareUrl)
+      const firmwareResponse = await fetch(firmware.path)
       if (!firmwareResponse.ok) {
         throw new Error('Failed to load firmware file')
       }
-      
+
       const firmwareArrayBuffer = await firmwareResponse.arrayBuffer()
       const firmwareUint8Array = new Uint8Array(firmwareArrayBuffer)
       const firmwareBinaryString = Array.from(firmwareUint8Array, (byte) => String.fromCharCode(byte)).join('')
-      
+
       setStatus('Flashing firmware...')
 
       await loader.writeFlash({
@@ -286,10 +271,10 @@ export default function LandingHero() {
         },
         calculateMD5Hash: () => '',
       })
-      
+
       setStatus('Flashing completed. Restarting device...')
       await loader.hardReset()
-      
+
       setStatus('Flashing completed successfully! Device has been restarted.')
     } catch (error) {
       console.error('Flashing failed:', error)
@@ -327,30 +312,45 @@ export default function LandingHero() {
               </p>
             </div>
             <div className="w-full max-w-sm space-y-2">
-              <Button 
-                className="w-full" 
+              <Button
+                className="w-full"
                 onClick={isConnected ? handleDisconnect : handleConnect}
-                disabled={isConnecting || isFlashing }
+                disabled={isConnecting || isFlashing}
               >
                 {isConnected ? 'Disconnect' : 'Connect'}
                 <Usb className="ml-2 h-4 w-4" />
               </Button>
-              <DeviceSelector 
+              <Selector
+                placeholder="Select device"
+                values={devices.map(d => d.name)}
                 onValueChange={(value) => {
-                  setSelectedDevice(value as DeviceModel)
+                  setSelectedDevice(value)
                   setSelectedBoardVersion('')
-                }} 
-                disabled={isConnecting || isFlashing || !isConnected} 
+                  setSelectedFirmware('')
+                }}
+                disabled={isConnecting || isFlashing || !isConnected}
               />
               {selectedDevice && (
-                <BoardVersionSelector 
-                  deviceModel={selectedDevice}
-                  onValueChange={setSelectedBoardVersion}
-                  disabled={isConnecting || isFlashing }
+                <Selector
+                  placeholder="Select board version"
+                  values={device.boards.map(b => b.name)}
+                  onValueChange={(value) => {
+                    setSelectedBoardVersion(value)
+                    setSelectedFirmware('')
+                  }}
+                  disabled={isConnecting || isFlashing}
                 />
               )}
-              <Button 
-                className="w-full" 
+              {selectedBoardVersion && (
+                <Selector
+                  placeholder="Select firmware version"
+                  values={board.supported_firmware.map(f => f.version)}
+                  onValueChange={setSelectedFirmware}
+                  disabled={isConnecting || isFlashing}
+                />
+              )}
+              <Button
+                className="w-full"
                 onClick={handleStartFlashing}
                 disabled={!selectedDevice || !selectedBoardVersion || isConnecting || isFlashing || !isConnected}
               >
@@ -358,8 +358,8 @@ export default function LandingHero() {
                 <Zap className="ml-2 h-4 w-4" />
               </Button>
               <div className="flex gap-2">
-                <Button 
-                  className="flex-1" 
+                <Button
+                  className="flex-1"
                   onClick={isLogging ? stopSerialLogging : startSerialLogging}
                   disabled={!isConnected || isFlashing}
                 >
@@ -381,7 +381,7 @@ export default function LandingHero() {
               {status && <p className="mt-2 text-sm font-medium">{status}</p>}
             </div>
             {isLogging && (
-              <div 
+              <div
                 ref={terminalContainerRef}
                 className="w-full max-w-4xl h-[400px] bg-black rounded-lg overflow-hidden mt-8 border border-gray-700 text-left"
               />

@@ -23,6 +23,15 @@
             "name": "Ultra",
             "boards": [
                 {
+                    "name": "201",
+                    "supported_firmware": [
+                        {
+                            "version": "2.4.1",
+                            "path": "firmware/esp-miner-factory-201-v2.4.1.bin"
+                        }
+                    ]
+                },
+                {
                     "name": "202",
                     "supported_firmware": [
                         {
@@ -32,6 +41,15 @@
                         {
                             "version": "2.4.1",
                             "path": "firmware/esp-miner-factory-202-v2.4.1.bin"
+                        }
+                    ]
+                },
+                {
+                    "name": "203",
+                    "supported_firmware": [
+                        {
+                            "version": "2.4.1",
+                            "path": "firmware/esp-miner-factory-203-v2.4.1.bin"
                         }
                     ]
                 },

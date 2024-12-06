@@ -167,6 +167,20 @@
             ]
         },
         {
+            "name": "NerdMiner",
+            "boards": [
+                {
+                    "name": "100",
+                    "supported_firmware": [
+                        {
+                            "version": "1.0.0",
+                            "path": "firmware/merged-flash-nerdminer.bin"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "NerdNOS",
             "boards": [
                 {

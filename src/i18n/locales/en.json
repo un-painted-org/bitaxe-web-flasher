@@ -1,0 +1,75 @@
+{
+    "common": {
+      "theme": "Theme",
+      "language": "Language",
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "header": {
+      "home": "Home",
+      "features": "Features",
+      "instructions": "Instructions"
+    },
+    "hero": {
+      "title": "Flash Your Bitaxe Directly from the Web",
+      "description": "Connect your device, select your model and board version, and start flashing immediately. No setup required.",
+      "getStarted": "Get Started",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "selectDevice": "Select device",
+      "selectBoard": "Select board version",
+      "selectFirmware": "Select firmware version",
+      "startFlashing": "Start Flashing",
+      "flashing": "Flashing...",
+      "startLogging": "Start Logging",
+      "stopLogging": "Stop Logging",
+      "downloadLogs": "Download Logs",
+      "loggingDescription": "Connect your device, log the serial data and download it later on."
+    },
+    "features": {
+      "title": "Key Features",
+      "fastFlashing": {
+        "title": "Fast Flashing",
+        "description": "Flash your Bitaxe in seconds, not minutes."
+      },
+      "webBased": {
+        "title": "Web-Based",
+        "description": "No need for special software. Use your web browser."
+      },
+      "multipleBoards": {
+        "title": "Multiple Boards",
+        "description": "Support for various Bitaxe boards and modules."
+      }
+    },
+    "instructions": {
+      "title": "How to Use",
+      "steps": {
+        "1": "Connect your Bitaxe to your computer.",
+        "2": "Click \"Connect Device\" and select your device from the popup.",
+        "3": "Select your device model from the dropdown.",
+        "4": "Choose the appropriate board version.",
+        "5": "Click \"Start Flashing\" to begin the process.",
+        "6": "Wait for the flashing process to complete.",
+        "7": "Disconnect and reset your device."
+      },
+      "moreInfo": "For more detailed instructions, please refer to our",
+      "documentation": "documentation"
+    },
+    "status": {
+      "connecting": "Connecting to device...",
+      "connected": "Connected successfully!",
+      "selectBoth": "Please select both device model and board version",
+      "connectFirst": "Please connect to a device first",
+      "preparing": "Preparing to flash...",
+      "flashing": "Flashing: {{percent}}% complete",
+      "completed": "Flashing completed. Restarting device...",
+      "success": "Flashing completed successfully! Device has been restarted.",
+      "loggingStarted": "Serial logging started..."
+    },
+    "errors": {
+      "browserCompatibility": {
+        "title": "Browser Compatibility Error",
+        "description": "This application requires a Chromium-based browser (such as Google Chrome, Microsoft Edge, or Brave) to function properly. Please switch to a compatible browser and try again."
+      }
+    }
+  }

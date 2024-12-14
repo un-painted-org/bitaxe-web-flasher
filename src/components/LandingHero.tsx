@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { ComputerIcon, Download, Usb, Zap } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from './ui/button'
 import { ESPLoader, Transport } from 'esptool-js'
+import { useTranslation } from 'react-i18next'
 import Header from './Header'
 import InstructionPanel from './InstructionPanel'
 import Selector from './Selector'
@@ -12,9 +13,8 @@ import device_data from './firmware_data.json'
 import { Terminal } from '@xterm/xterm';
 import '@xterm/xterm/css/xterm.css';
 
-import { serial } from "web-serial-polyfill";
-
 export default function LandingHero() {
+  const { t } = useTranslation();
   const [selectedDevice, setSelectedDevice] = useState<string>('')
   const [selectedBoardVersion, setSelectedBoardVersion] = useState('')
   const [selectedFirmware, setSelectedFirmware] = useState('')
@@ -51,8 +51,8 @@ export default function LandingHero() {
       });
       terminalRef.current = term;
       term.open(terminalContainerRef.current);
-      term.writeln('Serial logging started...');
-      logsRef.current = 'Serial logging started...\n';
+      term.writeln(t('status.loggingStarted'));
+      logsRef.current = t('status.loggingStarted') + '\n';
     }
 
     return () => {
@@ -61,7 +61,7 @@ export default function LandingHero() {
         terminalRef.current = null;
       }
     };
-  }, [isLogging]);
+  }, [isLogging, t]);
 
   const devices = device_data.devices;
   const device = selectedDevice !== ''
@@ -76,7 +76,7 @@ export default function LandingHero() {
 
   const handleConnect = async () => {
     setIsConnecting(true)
-    setStatus('Connecting to device...')
+    setStatus(t('status.connecting'))
 
     try {
       const port = await navigator.serial.requestPort()
@@ -90,10 +90,10 @@ export default function LandingHero() {
 
       serialPortRef.current = port
       setIsConnected(true)
-      setStatus('Connected successfully!')
+      setStatus(t('status.connected'))
     } catch (error) {
       console.error('Connection failed:', error)
-      setStatus(`Connection failed: ${error instanceof Error ? error.message : String(error)}`)
+      setStatus(`${t('status.connectionFailed')}: ${error instanceof Error ? error.message : String(error)}`)
     } finally {
       setIsConnecting(false)
     }
@@ -112,13 +112,13 @@ export default function LandingHero() {
       setStatus("")
     } catch (error) {
       console.error('Disconnect error:', error);
-      setStatus(`Disconnect error: ${error instanceof Error ? error.message : String(error)}`);
+      setStatus(`${t('status.disconnectError')}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
   const startSerialLogging = async () => {
     if (!serialPortRef.current) {
-      setStatus('Please connect to a device first');
+      setStatus(t('status.connectFirst'));
       return;
     }
 
@@ -159,7 +159,7 @@ export default function LandingHero() {
       }
     } catch (error) {
       console.error('Serial logging error:', error);
-      setStatus(`Logging error: ${error instanceof Error ? error.message : String(error)}`);
+      setStatus(`${t('status.loggingError')}: ${error instanceof Error ? error.message : String(error)}`);
     }
     setIsLogging(false);
   };
@@ -199,17 +199,17 @@ export default function LandingHero() {
 
   const handleStartFlashing = async () => {
     if (!serialPortRef.current) {
-      setStatus('Please connect to a device first')
+      setStatus(t('status.connectFirst'))
       return
     }
 
     if (!selectedDevice || !selectedBoardVersion) {
-      setStatus('Please select both device model and board version')
+      setStatus(t('status.selectBoth'))
       return
     }
 
     setIsFlashing(true)
-    setStatus('Preparing to flash...')
+    setStatus(t('status.preparing'))
 
     try {
       // Stop logging if it's active
@@ -254,7 +254,7 @@ export default function LandingHero() {
       const firmwareUint8Array = new Uint8Array(firmwareArrayBuffer)
       const firmwareBinaryString = Array.from(firmwareUint8Array, (byte) => String.fromCharCode(byte)).join('')
 
-      setStatus('Flashing firmware...')
+      setStatus(t('status.flashing', { percent: 0 }))
 
       await loader.writeFlash({
         fileArray: [{
@@ -267,18 +267,18 @@ export default function LandingHero() {
         eraseAll: false,
         compress: true,
         reportProgress: (fileIndex, written, total) => {
-          setStatus(`Flashing: ${Math.round((written / total) * 100)}% complete`)
+          setStatus(t('status.flashing', { percent: Math.round((written / total) * 100) }))
         },
         calculateMD5Hash: () => '',
       })
 
-      setStatus('Flashing completed. Restarting device...')
+      setStatus(t('status.completed'))
       await loader.hardReset()
 
-      setStatus('Flashing completed successfully! Device has been restarted.')
+      setStatus(t('status.success'))
     } catch (error) {
       console.error('Flashing failed:', error)
-      setStatus(`Flashing failed: ${error instanceof Error ? error.message : String(error)}. Please try again.`)
+      setStatus(`${t('status.flashingFailed')}: ${error instanceof Error ? error.message : String(error)}. Please try again.`)
     } finally {
       setIsFlashing(false)
     }
@@ -288,10 +288,10 @@ export default function LandingHero() {
     return (
       <div className="container px-4 md:px-6 py-12 text-center">
         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none mb-4">
-          Browser Compatibility Error
+          {t('errors.browserCompatibility.title')}
         </h1>
         <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-          This application requires a Chromium-based browser (such as Google Chrome, Microsoft Edge, or Brave) to function properly. Please switch to a compatible browser and try again.
+          {t('errors.browserCompatibility.description')}
         </p>
       </div>
     )
@@ -305,10 +305,10 @@ export default function LandingHero() {
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                Flash Your Bitaxe Directly from the Web
+                {t('hero.title')}
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Connect your device, select your model and board version, and start flashing immediately. No setup required.
+                {t('hero.description')}
               </p>
             </div>
             <div className="w-full max-w-sm space-y-2">
@@ -317,11 +317,11 @@ export default function LandingHero() {
                 onClick={isConnected ? handleDisconnect : handleConnect}
                 disabled={isConnecting || isFlashing}
               >
-                {isConnected ? 'Disconnect' : 'Connect'}
+                {isConnected ? t('hero.disconnect') : t('hero.connect')}
                 <Usb className="ml-2 h-4 w-4" />
               </Button>
               <Selector
-                placeholder="Select device"
+                placeholder={t('hero.selectDevice')}
                 values={devices.map(d => d.name)}
                 onValueChange={(value) => {
                   setSelectedDevice(value)
@@ -332,7 +332,7 @@ export default function LandingHero() {
               />
               {selectedDevice && (
                 <Selector
-                  placeholder="Select board version"
+                  placeholder={t('hero.selectBoard')}
                   values={device.boards.map(b => b.name)}
                   onValueChange={(value) => {
                     setSelectedBoardVersion(value)
@@ -343,7 +343,7 @@ export default function LandingHero() {
               )}
               {selectedBoardVersion && (
                 <Selector
-                  placeholder="Select firmware version"
+                  placeholder={t('hero.selectFirmware')}
                   values={board.supported_firmware.map(f => f.version)}
                   onValueChange={setSelectedFirmware}
                   disabled={isConnecting || isFlashing}
@@ -354,7 +354,7 @@ export default function LandingHero() {
                 onClick={handleStartFlashing}
                 disabled={!selectedDevice || !selectedBoardVersion || isConnecting || isFlashing || !isConnected}
               >
-                {isFlashing ? 'Flashing...' : 'Start Flashing'}
+                {isFlashing ? t('hero.flashing') : t('hero.startFlashing')}
                 <Zap className="ml-2 h-4 w-4" />
               </Button>
               <div className="flex gap-2">
@@ -363,7 +363,7 @@ export default function LandingHero() {
                   onClick={isLogging ? stopSerialLogging : startSerialLogging}
                   disabled={!isConnected || isFlashing}
                 >
-                  {isLogging ? 'Stop Logging' : 'Start Logging'}
+                  {isLogging ? t('hero.stopLogging') : t('hero.startLogging')}
                   <ComputerIcon className="ml-2 h-4 w-4" />
                 </Button>
                 <Button
@@ -371,12 +371,12 @@ export default function LandingHero() {
                   onClick={downloadLogs}
                   disabled={!logsRef.current}
                 >
-                  Download Logs
+                  {t('hero.downloadLogs')}
                   <Download className="ml-2 h-4 w-4" />
                 </Button>
               </div>
               <p className="mx-auto max-w-[400px] text-gray-500 md:text-m dark:text-gray-400">
-                Connect your device, log the serial data and download it later on.
+                {t('hero.loggingDescription')}
               </p>
               {status && <p className="mt-2 text-sm font-medium">{status}</p>}
             </div>

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ClientThemeWrapper } from '@/components/ClientThemeWrapper'
-import Header from '@/components/Header'
+import { ClientThemeWrapper } from '../components/ClientThemeWrapper'
+import { I18nProvider } from '../components/I18nProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,11 +31,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ClientThemeWrapper>
-          <div className="min-h-screen bg-background text-foreground">
-            <main className="w-full p-4">
-              {children}
-            </main>
-          </div>
+          <I18nProvider>
+              <div className="min-h-screen bg-background text-foreground">
+                <main className="w-full p-4">
+                  {children}
+                </main>
+              </div>
+          </I18nProvider>
         </ClientThemeWrapper>
       </body>
     </html>

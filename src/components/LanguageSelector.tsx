@@ -11,6 +11,7 @@ const LanguageSelector = () => {
     { value: 'tlh', label: 'Klingon' },
     { value: 'pt', label: 'Portuguese' },
     { value: 'ru', label: 'Русский' },
+    { value: 'tr', label: 'Türkçe' },
     { value: 'sk', label: 'Slovenský' }
   ];
 

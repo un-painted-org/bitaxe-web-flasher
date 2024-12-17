@@ -6,6 +6,7 @@ import en from './locales/en.json';
 import de from './locales/de.json';
 import pt from './locales/pt.json';
 import ru from './locales/ru.json';
+import sk from './locales/sk.json';
 import it from './locales/it.json';
 import tlh from './locales/tlh.json';
 
@@ -19,7 +20,8 @@ i18n
       it: { translation: it },
       tlh: { translation: tlh },
       pt: { translation: pt },
-      ru: { translation: ru }
+      ru: { translation: ru },
+      sk: { translation: sk }
     },
     fallbackLng: 'en',
     lng: 'en', // Set default language to English

@@ -7,8 +7,8 @@
                     "name": "102",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-102-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-102-v2.4.5.bin"
                         }
                         ,
                         {
@@ -35,8 +35,8 @@
                     "name": "202",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-202-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-202-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",
@@ -50,6 +50,10 @@
                         {
                             "version": "2.4.1",
                             "path": "firmware/esp-miner-factory-203-v2.4.1.bin"
+                        },
+                        {
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-203-v2.4.5.bin"
                         }
                     ]
                 },
@@ -57,8 +61,8 @@
                     "name": "204",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-204-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-204-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",
@@ -70,8 +74,8 @@
                     "name": "205",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-205-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-205-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",
@@ -88,8 +92,8 @@
                     "name": "401",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-401-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-401-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",
@@ -101,8 +105,8 @@
                     "name": "402",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-402-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-402-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",
@@ -114,8 +118,8 @@
                     "name": "403",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-403-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-403-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",
@@ -132,8 +136,8 @@
                     "name": "601",
                     "supported_firmware": [
                         {
-                            "version": "2.4.0",
-                            "path": "firmware/esp-miner-factory-601-v2.4.0.bin"
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-601-v2.4.5.bin"
                         },
                         {
                             "version": "2.4.1",

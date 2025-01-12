@@ -28,6 +28,10 @@
                         {
                             "version": "2.4.1",
                             "path": "firmware/esp-miner-factory-201-v2.4.1.bin"
+                        },
+                         {
+                            "version": "2.4.5",
+                            "path": "firmware/esp-miner-factory-201-v2.4.5.bin"
                         }
                     ]
                 },

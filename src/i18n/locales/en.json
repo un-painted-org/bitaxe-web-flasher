@@ -11,7 +11,7 @@
       "instructions": "Instructions"
     },
     "hero": {
-      "title": "Flash Your Bitaxe Directly from the Web",
+      "title": "Flash Your LV07 Directly from the Web",
       "description": "Connect your device, select your model and board version, and start flashing immediately. No setup required.",
       "getStarted": "Get Started",
       "connect": "Connect",
@@ -30,7 +30,7 @@
       "title": "Key Features",
       "fastFlashing": {
         "title": "Fast Flashing",
-        "description": "Flash your Bitaxe in seconds, not minutes."
+        "description": "Flash your LV07 in seconds, not minutes."
       },
       "webBased": {
         "title": "Web-Based",
@@ -44,7 +44,7 @@
     "instructions": {
       "title": "How to Use",
       "steps": {
-        "1": "Connect your Bitaxe to your computer.",
+        "1": "Connect your LV07 to your computer.",
         "2": "Click \"Connect Device\" and select your device from the popup.",
         "3": "Select your device model from the dropdown.",
         "4": "Choose the appropriate board version.",

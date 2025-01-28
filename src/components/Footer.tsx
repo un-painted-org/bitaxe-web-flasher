@@ -36,7 +36,11 @@ export default function Footer() {
           </button>
           <div className="text-center">
             <h2 className="text-lg">Terms</h2>
-            <p>The source code is provided under GPL-V3 License.</p>
+            <p>The source code is provided under GPL-V3 License.
+            </p>
+            <p>
+              https://github.com/un-painted-org/bitaxe-web-flasher
+            </p>
           </div>
         </div>
       </div>
@@ -45,7 +49,7 @@ export default function Footer() {
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-gray-500">© 2025 Bitaxe Web Flasher. All rights reserved.</p>
         <Link className="text-xs hover:underline underline-offset-4" href="https://wantclue.de">
-          Maintained by WantClue
+          Maintained by un-painted-org
         </Link>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
         <button 

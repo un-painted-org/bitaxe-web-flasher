@@ -28,7 +28,7 @@ export default function InstructionPanel({ isOpen, onClose }: InstructionPanelPr
         {t('instructions.moreInfo')}{' '}
           <a 
             className='text-blue-500' 
-            href="https://www.osmu.wiki"
+            href="https://github.com/un-painted-org/ESP-Miner/wiki"
             target="_blank"
             rel="noopener noreferrer"
           >

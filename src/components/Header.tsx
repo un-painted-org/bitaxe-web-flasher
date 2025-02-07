@@ -21,7 +21,7 @@ export default function Header({ onOpenPanel }: HeaderProps) {
 
       {/* Middle section */}
       <div className="flex items-center">
-        <Link className="flex items-center justify-center" href="https://bitaxeorg.github.io/bitaxe-web-flasher">
+        <Link className="flex items-center justify-center" href="https://bitaxeorg.github.io/bitaxe-web-flasher" target="_blank">
           <Cpu className="h-6 w-6 mr-2" />
           <span className="font-bold">Bitaxe Web Flasher</span>
         </Link>

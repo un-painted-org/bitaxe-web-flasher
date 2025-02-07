@@ -16,23 +16,15 @@ export default function Header({ onOpenPanel }: HeaderProps) {
       {/* Left section */}
       <Link className="flex items-center justify-center" href="#">
         <Cpu className="h-6 w-6 mr-2" />
-        <span className="font-bold">Bitaxe Web Flasher</span>
+        <span className="font-bold">Lucky Miner Web Flasher</span>
       </Link>
 
       {/* Middle section */}
       <div className="flex items-center">
-        <a 
-          href="https://discord.com/invite/osmu"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:opacity-90 transition-opacity"
-        >
-          <img 
-            src="https://dcbadge.limes.pink/api/server/3E8ca2dkcC" 
-            alt="Discord Server" 
-            className="h-6"
-          />
-        </a>
+        <Link className="flex items-center justify-center" href="https://bitaxeorg.github.io/bitaxe-web-flasher">
+          <Cpu className="h-6 w-6 mr-2" />
+          <span className="font-bold">Bitaxe Web Flasher</span>
+        </Link>
       </div>
 
       {/* Right section */}

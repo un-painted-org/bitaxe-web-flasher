@@ -6,14 +6,14 @@ const LanguageSelector = () => {
 
   const languages = [
     { value: 'en', label: 'English' },
-    { value: 'de', label: 'Deutsch' },
+    { value: 'de', label: 'Deutsch' }/* ,
     { value: 'it', label: 'Italiano' },
     { value: 'tlh', label: 'Klingon' },
     { value: 'pt', label: 'Portuguese' },
     { value: 'ru', label: 'Русский' },
     { value: 'tr', label: 'Türkçe' },
     { value: 'sk', label: 'Slovenský' },
-    { value: 'ro', label: 'Română' }
+    { value: 'ro', label: 'Română' } */
   ];
 
   const handleLanguageChange = (value: string) => {

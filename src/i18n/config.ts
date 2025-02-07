@@ -4,13 +4,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import en from './locales/en.json';
 import de from './locales/de.json';
-import pt from './locales/pt.json';
-import ru from './locales/ru.json';
-import tr from './locales/tr.json';
-import sk from './locales/sk.json';
-import it from './locales/it.json';
-import tlh from './locales/tlh.json';
-import ro from './locales/ro.json';
+//import pt from './locales/pt.json';
+//import ru from './locales/ru.json';
+//import tr from './locales/tr.json';
+//import sk from './locales/sk.json';
+//import it from './locales/it.json';
+//import tlh from './locales/tlh.json';
+//import ro from './locales/ro.json';
 
 i18n
   .use(LanguageDetector)
@@ -18,14 +18,14 @@ i18n
   .init({
     resources: {
       en: { translation: en },
-      de: { translation: de },
-      it: { translation: it },
+      de: { translation: de } //,
+/*       it: { translation: it },
       tlh: { translation: tlh },
       pt: { translation: pt },
       ru: { translation: ru },
       tr: { translation: tr },
       sk: { translation: sk },
-      ro: { translation: ro }
+      ro: { translation: ro } */
     },
     fallbackLng: 'en',
     lng: 'en', // Set default language to English

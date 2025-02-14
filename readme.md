@@ -1,3 +1,12 @@
+
+# Customized firmware for the Lucky Miner LV07 (and LV06)
+
+Have a look at the wiki: https://github.com/un-painted-org/ESP-Miner/wiki
+
+***
+
+*From parent repo*
+
 [![](https://dcbadge.vercel.app/api/server/3E8ca2dkcC)](https://discord.gg/3E8ca2dkcC)
 
 # Bitaxe Web Flasher

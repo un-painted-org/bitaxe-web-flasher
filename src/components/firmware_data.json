@@ -31,6 +31,10 @@
                         {
                             "version": "2.6.0b1",
                             "path": "firmware/esp-miner-factory-lv06-v2.6.0b1.bin"
+                        },
+                        {
+                            "version": "2.6.0 (Pro Button version)",
+                            "path": "firmware/esp-miner-factory-lv06-v2.6.0.bin"
                         }
                     ]
                 }

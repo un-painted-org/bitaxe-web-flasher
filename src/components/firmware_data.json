@@ -7,12 +7,8 @@
                     "name": "302",
                     "supported_firmware": [
                         {
-                            "version": "2.5.0",
-                            "path": "firmware/esp-miner-factory-lv07-v2.5.0_LV07-v1.0.bin"
-                        },
-                        {
-                            "version": "2.6.0b3 (BETA)",
-                            "path": "firmware/esp-miner-factory-lv07-v2.6.0b3-LV07.bin"
+                            "version": "2.8.1",
+                            "path": "firmware/esp-miner-factory-lv07-v2.8.1-LV07.bin"
                         },
                         {
                             "version": "2.6.0",
@@ -29,11 +25,11 @@
                     "name": "0.11",
                     "supported_firmware": [
                         {
-                            "version": "2.6.0b1",
-                            "path": "firmware/esp-miner-factory-lv06-v2.6.0b1.bin"
+                            "version": "2.8.1",
+                            "path": "firmware/esp-miner-factory-lv06-v2.8.1-LV07.bin"
                         },
                         {
-                            "version": "2.6.0 (with Pro Mode Button)",
+                            "version": "2.6.0",
                             "path": "firmware/esp-miner-factory-lv06-v2.6.0.bin"
                         }
                     ]

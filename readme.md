@@ -7,11 +7,9 @@ Have a look at the wiki: https://github.com/un-painted-org/ESP-Miner/wiki
 
 *From parent repo*
 
-[![](https://dcbadge.vercel.app/api/server/3E8ca2dkcC)](https://discord.gg/3E8ca2dkcC)
-
 # Bitaxe Web Flasher
 
-The Bitaxe Web Flasher is the open source tool that provides you an easy solution to flash a factory file to you device.
+The Bitaxe Web Flasher is the open source tool that provides you an easy solution to flash a factory file to your device.
 
 ## Flashing process
 

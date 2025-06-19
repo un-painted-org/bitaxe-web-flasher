@@ -12,6 +12,7 @@
     },
     "hero": {
       "title": "Direkt aus dem Browser deinen LV06 oder LV07 flashen",
+      "wiki": "Wirf einen Blick ins Wiki: ",
       "description": "Verbinde deinen LV06 oder LV07, wähle dein Modell und die Board-Version aus und beginne sofort mit dem Flashen. Keine Installation erforderlich.",
       "getStarted": "Anleitung",
       "connect": "Verbinden",

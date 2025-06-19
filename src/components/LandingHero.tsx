@@ -213,6 +213,11 @@ export default function LandingHero() {
       return
     }
 
+    if (!selectedFirmware) {
+      setStatus(t('status.selectBoth'))
+      return
+    }
+
     setIsFlashing(true)
     setStatus(t('status.preparing'))
 
@@ -343,6 +348,9 @@ export default function LandingHero() {
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
                 {t('hero.description')}
               </p>
+              <p className="mx-auto max-w-[1000px] text-gray-500 md:text-xl dark:text-gray-400">
+                {t('hero.wiki')} <a href="https://github.com/un-painted-org/ESP-Miner/wiki" target="_blank" rel="noopener noreferrer">https://github.com/un-painted-org/ESP-Miner/wiki</a>
+              </p>
             </div>
             <div className="w-full max-w-sm space-y-2">
               <Button
@@ -397,7 +405,7 @@ export default function LandingHero() {
               <Button
                 className="w-full"
                 onClick={handleStartFlashing}
-                disabled={!selectedDevice || !selectedBoardVersion || isConnecting || isFlashing || !isConnected}
+                disabled={!selectedDevice || !selectedBoardVersion || !selectedFirmware || isConnecting || isFlashing || !isConnected}
               >
                 {isFlashing ? t('hero.flashing') : t('hero.startFlashing')}
                 <Zap className="ml-2 h-4 w-4" />

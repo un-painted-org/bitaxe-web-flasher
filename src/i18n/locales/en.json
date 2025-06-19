@@ -12,6 +12,7 @@
     },
     "hero": {
       "title": "Flash Your LV06 or LV07 Directly from the Web",
+      "wiki": "Take a look at the wiki: ",
       "description": "Connect your device, select your model and board version, and start flashing immediately. No setup required.",
       "getStarted": "Get Started",
       "connect": "Connect",

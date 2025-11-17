@@ -35,6 +35,20 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "SupraHEX",
+            "boards": [
+                {
+                    "name": "701",
+                    "supported_firmware": [
+                        {
+                            "version": "2.9.0-TCH-All-in-one",
+                            "path": "firmware/esp-miner-factory-v2.9.0-TCH-All-in-one-701.bin"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
